@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('conversations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->string('lable')->nullable();
-            $table->timestamps();
+        Schema::table('conversations', function (Blueprint $table) {
+            //
+            $table->foreignId('last_message_id')->nullable()->constrained('messages')->nullOnDeletes();
         });
     }
 
@@ -28,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conversations');
+        Schema::table('conversation', function (Blueprint $table) {
+            //
+        });
     }
 };
