@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->string('lable')->nullable();
+            $table->string('label')->nullable();
+            $table->enum('type', ['peer', 'group']);
+
             $table->timestamps();
         });
     }

@@ -14,12 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('conversation_id')->constrained('conversations')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // corrected foreign key definition
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete(); // corrected foreign key definition
             $table->timestamp('joined_at')->nullable(); // corrected timestamp column definition
-            $table->timestamp('updated_at')->nullable(); // corrected timestamp column definition
             $table->enum('role', ['admin', 'member'])->default('member');
+            $table->primary(['conversation_id','user_id']);
         });
     }
 

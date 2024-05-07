@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('recipients', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('message_id')->constrained('messages')->cascadeOnDelete();
             $table->timestamp('read_at')->nullable(); // Changed from timestamps() to timestamp()
             $table->softDeletes();
+            $table->primary(['user_id','message_id']);
         });
     }
 

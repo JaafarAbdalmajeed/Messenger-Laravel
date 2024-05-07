@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('conversation_id')->constrained()->cascadeOnDelete(); // corrected foreign key definition
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); // corrected foreign key definition
+            $table->foreignId('conversation_id')->constrained('conversations')->cascadeOnDelete(); // corrected foreign key definition
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete(); // corrected foreign key definition
             $table->text('body');
-            $table->enum('type', ['text', 'attachment']);
+            $table->enum('type', ['text', 'attachment'])->default('text');
             $table->softDeletes();
             $table->timestamps();
         });

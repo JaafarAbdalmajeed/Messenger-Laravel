@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::table('conversations', function (Blueprint $table) {
             //
-            $table->foreignId('last_message_id')->nullable()->constrained('messages')->nullOnDeletes();
+            $table->foreignId('last_message_id')->nullable()->constrained('messages')->nullOnDelete(); // corrected method name
+
         });
     }
 
@@ -28,6 +29,7 @@ return new class extends Migration
     {
         Schema::table('conversation', function (Blueprint $table) {
             //
+            $table->dropConstrainedForeignId('last_message_id');
         });
     }
 };
