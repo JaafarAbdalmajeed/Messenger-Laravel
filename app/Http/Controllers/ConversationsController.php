@@ -12,7 +12,6 @@ class ConversationsController extends Controller
 {
     public function index()
     {
-        $user = User::find(1);//Auth::user();
         return $user->conversations()->paginate();
     }
 

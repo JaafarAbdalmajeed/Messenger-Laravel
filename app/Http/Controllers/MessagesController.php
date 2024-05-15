@@ -53,7 +53,7 @@ class MessagesController extends Controller
             ]
         ]);
 
-        $user = User::find(1);//Auth::user();
+        $user = Auth::user();
         $conversation_id = $request->post('conversation_id');
         $user_id = $request->post('user_id');
 
@@ -101,6 +101,8 @@ class MessagesController extends Controller
             DB::commit();
 
             broadcast(new MessageCreated($message));
+            // event(new MessageCreated($message));
+
 
         } catch (Throwable $e) {
             DB::rollBack();
